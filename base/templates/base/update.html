@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'base/style-edit.css' %}"
+        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+            rel="stylesheet"
+        />
+
+        <script
+            src="https://kit.fontawesome.com/6b20b1c14d.js"
+            crossorigin="anonymous"
+        ></script>
+        <title>Update Contact</title>
+    </head>
+    <body>
+        <div class="container">
+            <header class="hero">
+                <a href="{% url 'home' %}">
+                    <i class="fas fa-chevron-circle-left back-btn"></i>
+                </a>
+
+                <div class="hero-info">
+                    <h1 class="name">{{instance.full_name}}</h1>
+                    <p class="relationship-hero">{{instance.relation}}</p>
+                </div>
+            </header>
+            <form method="POST" action="{{ instance.get_update_url }}">
+                {% csrf_token %}
+                <section class="contact-info">
+                    <div class="info-line">
+                        <i class="fas fa-phone icon-gradient"></i>
+                        <input
+                            type="text"
+                            class="type"
+                            name="fullname"
+                            placeholder="Full Name"
+                            value="{{ instance.full_name }}"
+                            required
+                        />
+                    </div>
+
+                    <div class="info-line">
+                        <i class="fas fa-user-circle icon-gradient"></i>
+                        <input
+                            type="text"
+                            class="type"
+                            name="relation"
+                            placeholder="Relationship"
+                            value="{{ instance.relation }}"
+                            required
+                        />
+                    </div>
+
+                    <div class="info-line">
+                        <i class="fas fa-sms icon-gradient"></i>
+                        <input
+                            type="text"
+                            class="type"
+                            name="phone_number"
+                            placeholder="Phone Number"
+                            value="{{ instance.phone_number }}"
+                            required
+                            required
+                        />
+                    </div>
+
+                    <div class="info-line">
+                        <i class="fas fa-envelope icon-gradient"></i>
+                        <input
+                            type="text"
+                            class="type"
+                            name="email"
+                            value="{{ instance.email }}"
+                            placeholder="Email"
+                            required
+                        />
+                    </div>
+
+                    <div class="info-line">
+                        <i
+                            class="fas fa-map-marker-alt icon-gradient location"
+                        ></i>
+                        <input
+                            type="text"
+                            class="type"
+                            name="address"
+                            placeholder="Address"
+                            value="{{ instance.address }}"
+                            required
+                        />
+                    </div>
+                </section>
+
+                <section class="button-container">
+                    <div class="update-contact">
+                        <button type="submit" class="button">
+                            <i class="fas fa-check-circle icon-gradient"></i>
+                            Update
+                        </button>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </body>
+</html>
